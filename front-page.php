@@ -16,9 +16,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 						<?php 
 							$args = array(
 	                        'post_type' => 'post',
-	                        'posts_per_page' => 3,
-	                        'orderby' => 'title menu_order',
-	                        'order' => 'DESC'
+	                        'posts_per_page' => 3
 	                    	);
 	                    	$posts = get_posts( $args );
 							
@@ -33,24 +31,37 @@ $container   = get_theme_mod( 'understrap_container_type' );
 											<?php the_category(' ');?>
 										</span>
 										<?php the_post_thumbnail('large');?>
-										<a href="<?php the_permalink();?>" class="title"><?php the_title();?></a>
+										<a href="<?php the_permalink();?>" class="title">
+											<?php if (strlen($post->post_title) > 65){
+													echo substr(the_title($before = '', $after = '', FALSE), 0, 65) . '....'; } else {
+													the_title();
+												} 
+											?>
+										</a>
 									
 								    </div>
 
 								<?php } else { ?>
-
-									<div class="small-news">
+									
+									<div class="small-news small-news-<?php echo $key;?>">
 										<span class="category">
 											<?php the_category(' ');?>
 										</span>
 										<?php the_post_thumbnail('small');?>
-										<a href="<?php the_permalink();?>" class="title"><?php the_title();?></a>
+										<a href="<?php the_permalink();?>" class="title">
+											<?php if (strlen($post->post_title) > 45){
+													echo substr(the_title($before = '', $after = '', FALSE), 0, 45) . '....'; } else {
+													the_title();
+												} 
+											?>
+										</a>
 									</div>	
 
 								<?php }
 
+								endforeach;
 
-								wp_reset_postdata(); endforeach;
+								wp_reset_postdata(); 
 								?>
 							<?php } ?>
 						
@@ -70,37 +81,42 @@ $container   = get_theme_mod( 'understrap_container_type' );
 				<div class="col">
 					<h3 class="section-title">EGYPT NEWS</h3>
 					<div class="slider-container">
-							<div class="news-slider">
-						
-						<?php $args = array(
-						    'post_type' => 'post',
-						    'category_name'=>'local'
-						);
+						<div class="news-slider">
+							
+							<?php $args = array(
+								'post_type' => 'post',
+								'category_name'=>'local'
+							);
 
-						$loop = new wp_Query($args);
-						
-						while($loop->have_posts()) : $loop->the_post(); ?>
-							<div class="slide">
-							    <a href="<?php the_permalink()?>">
-							    	
-							    	<?php
-								    echo get_the_post_thumbnail($post->ID, 'small');
-								    ?>
-						
-								    <span class="slide-title">
-								    	<?php the_title(); ?> 
-								    </span>
-							    </a>
-						    </div>
-						<?php     
-						endwhile;
-						
-						wp_reset_query(); ?>
-					</div>
-					<div class="silder-controllers">
-							<span class="next"><i class="fa fa-angle-right"></i></span>
-							<span class="prev"><i class="fa fa-angle-left"></i></span>
-					</div>
+							$loop = new wp_Query($args);
+							
+							while($loop->have_posts()) : $loop->the_post(); ?>
+								<div class="slide">
+									<a href="<?php the_permalink()?>">
+										
+										<?php
+										echo get_the_post_thumbnail($post->ID, 'small');
+										?>
+							
+										<span class="slide-title">
+											<?php if (strlen($post->post_title) > 45){
+													echo substr(the_title($before = '', $after = '', FALSE), 0, 45) . '....'; } else {
+													the_title();
+												} 
+											?> 
+										</span>
+									</a>
+								</div>
+							<?php     
+							endwhile;
+							
+							wp_reset_query(); ?>
+						</div>
+
+						<div class="silder-controllers">
+								<span class="next"><i class="fa fa-angle-right"></i></span>
+								<span class="prev"><i class="fa fa-angle-left"></i></span>
+						</div>
 					</div>
 					
   
@@ -138,10 +154,6 @@ $container   = get_theme_mod( 'understrap_container_type' );
 							
 							wp_reset_query(); ?>
 
-						
-						
-						
-
 					</section> <!-- ./features section -->
 				</div>
 				<div class="col-md-4">
@@ -150,9 +162,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 						<ul class="list-group stories-list">
 						<?php $args = array(
 						    'post_type' => 'stories',
-						    'posts_per_page' => 5,
-						    'orderby' => 'title menu_order',
-	                        'order' => 'DESC'
+						    'posts_per_page' => 5
 						);
 
 						$loop = new wp_Query($args);
@@ -167,7 +177,6 @@ $container   = get_theme_mod( 'understrap_container_type' );
 						<?php  
 						$counter++;   
 						endwhile;
-						
 						wp_reset_query(); ?>
 						</ul>
 					</section> <!-- ./stories section -->

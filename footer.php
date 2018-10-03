@@ -14,15 +14,11 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 <div class="wrapper" id="wrapper-footer">
 
-	<div class="<?php echo esc_attr( $container ); ?>">
 
-		<div class="row">
 
-			<div class="col-md-12">
+				<footer class="site-footer bg-primary text-white py-3" id="colophon">
 
-				<footer class="site-footer" id="colophon">
-
-					<div class="site-info">
+					<div class="site-info text-center">
 
 						Copyrights &copy; -2018
 
@@ -30,11 +26,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 				</footer><!-- #colophon -->
 
-			</div><!--col end -->
 
-		</div><!-- row end -->
-
-	</div><!-- container end -->
 
 </div><!-- wrapper end -->
 
@@ -56,21 +48,21 @@ $container = get_theme_mod( 'understrap_container_type' );
 			   responsive: [
 
 			   				{
-						      breakpoint: 1000,
+						      breakpoint: 992,
 						      settings: {
 						        slidesToShow: 3,
 						        slidesToScroll: 1
 						      }
 						    },
 						    {
-						      breakpoint: 700,
+						      breakpoint: 768,
 						      settings: {
 						        slidesToShow: 2,
 						        slidesToScroll: 1
 						      }
 						    },
 						    {
-						      breakpoint: 480,
+						      breakpoint: 544,
 						      settings: {
 						        slidesToShow: 1,
 						        slidesToScroll: 1
